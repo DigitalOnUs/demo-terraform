@@ -1,18 +1,16 @@
-terraform {
-  required_version = ">= 0.11.9"
-}
-
 provider "aws" {
   access_key = "${var.access_key}"
   secret_key = "${var.secret_key}"
-  region     = "us-west-1"
+  region     = "us-west-2"
 }
 
 terraform {
+  required_version = ">= 0.11.9"
+
   backend "s3" {
     bucket = "dou-terraform"
     key    = "iac-meetup/terraform.tfstate"
-    region = "us-west-1"
+    region = "us-west-2"
   }
 }
 
@@ -56,9 +54,8 @@ resource "aws_subnet" "subnet_c" {
 }
 
 resource "aws_subnet" "subnet_lb" {
-  vpc_id            = "${aws_vpc.my_vpc.id}"
-  cidr_block        = "10.0.4.0/24"
-  availability_zone = "${var.region}"
+  vpc_id     = "${aws_vpc.my_vpc.id}"
+  cidr_block = "10.0.4.0/24"
 
   tags {
     Name = "terraform-demo"
