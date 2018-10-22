@@ -13,26 +13,26 @@ resource "aws_instance" "consul_server_1" {
   }
 
   provisioner "file" {
-    source      = "consul.json.server"
-    destination = "/var/consul/config/consul.json.template"
+    source      = "consul/consul.json.server"
+    destination = "/tmp/consul.json.server"
     
     connection {
       type = "ssh"
       user = "ubuntu"
-      private_key = "${file("ubuntu.pub")}"
+      private_key = "${file("ubuntu.pem")}"
     }
   }
 
   provisioner "remote-exec" {
     scripts = [
-      "install-consul.sh",
-      "run-consul-server.sh"
+      "scripts/install-consul.sh",
+      "scripts/run-consul-server.sh"
     ]
 
     connection {
       type = "ssh"
       user = "ubuntu"
-      private_key = "${file("ubuntu.pub")}"
+      private_key = "${file("ubuntu.pem")}"
     }
   }
 }

@@ -13,26 +13,26 @@ resource "aws_instance" "lb" {
   # Copies the haproxy.cfg file to /home/haproxy.cfg
   provisioner "file" {
     source      = "scripts/haproxy.cfg"
-    destination = "/home/haproxy.cfg"
+    destination = "/tmp/haproxy.cfg"
     
     connection {
       type = "ssh"
       user = "ubuntu"
-      private_key = "${file("ubuntu.pub")}"
+      private_key = "${file("ubuntu.pem")}"
     }
   }
 
   provisioner "remote-exec" {
     scripts = [
-      "install-consul.sh",
-      "install-docker.sh",
-      "run-docker-lb.sh"
+      "scripts/install-consul.sh",
+      "scripts/install-docker.sh",
+      "scripts/run-docker-lb.sh"
     ]
 
     connection {
       type = "ssh"
       user = "ubuntu"
-      private_key = "${file("ubuntu.pub")}"
+      private_key = "${file("ubuntu.pem")}"
     }
   }
 }
