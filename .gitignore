@@ -4,6 +4,7 @@
 *.tfstate
 *.tfstate.backup
 .terraform/
+terraform.tfvars
 
 # Windows generated files #
 Thumbs.db
@@ -25,4 +26,3 @@ $RECYCLE.BIN/
 .Trashes
 ehthumbs.db
 Thumbs.db 
-terraform.tfvars

@@ -3,6 +3,8 @@ resource "aws_instance" "consul_server_1" {
   instance_type     = "${var.instance_type}"
   availability_zone = "${var.region}a"
 
+  key_name = "ubuntu"
+
   tags {
     Name        = "consul_server_1"
     Environment = "demo"
