@@ -6,12 +6,6 @@ provider "aws" {
 
 terraform {
   required_version = ">= 0.11.9"
-
-  backend "s3" {
-    bucket = "dou-terraform"
-    key    = "iac-meetup/terraform.tfstate"
-    region = "us-west-2"
-  }
 }
 
 resource "aws_vpc" "my_vpc" {

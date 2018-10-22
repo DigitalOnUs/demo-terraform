@@ -4,7 +4,7 @@ resource "aws_instance" "consul_server_1" {
   availability_zone = "${var.region}a"
   subnet_id                   = "${aws_subnet.subnet_a.id}"
   vpc_security_group_ids      = ["${aws_security_group.ncv.id}"]
-  key_name = "${aws_key_pair.default.id}"
+  key_name = "ubuntu"
 
   tags {
     Name        = "consul_server_1"
