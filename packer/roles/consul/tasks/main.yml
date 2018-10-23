@@ -1,0 +1,9 @@
+- name: download consul
+  get_url:
+    url: https://releases.hashicorp.com/consul/v1.3.0/consul_v1.3.0_linux_amd64.zip
+    dest: /usr/local/src/consul.zip
+
+- name: install consul
+  command: unzip -o /usr/local/src/consul.zip -d /usr/local/bin
+  args:
+    creates: /usr/local/bin/consul
