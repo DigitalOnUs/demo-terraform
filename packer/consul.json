@@ -10,7 +10,7 @@
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "region": "{{user `aws_region`}}",
-      "source_ami": "ami-0f2e4fd741152d359",
+      "source_ami": "ami-01e0cf6e025c036e4",
       "instance_type": "t1.micro",
       "ssh_username": "ubuntu",
       "ami_name": "consul {{timestamp}}"
