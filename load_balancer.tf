@@ -10,20 +10,9 @@ resource "aws_instance" "lb" {
     Name = "terraform-demo"
   }
 
-  provisioner "file" {
-    source      = "scripts/haproxy.cfg"
-    destination = "/tmp/haproxy.cfg"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
   provisioner "remote-exec" {
     scripts = [
-      "scripts/run-docker-lb.sh",
+      "/tmp/docker-lb.sh",
     ]
 
     connection {

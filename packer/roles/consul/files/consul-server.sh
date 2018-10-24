@@ -2,6 +2,7 @@
 # Create consul user
 sudo adduser --disabled-password --gecos "Consul User" consul
 sudo usermod -a -G sudo consul
+chmod +x /usr/local/bin/consul
 
 # Directories to configure Consul
 sudo mkdir -p /etc/consul.d
