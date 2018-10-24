@@ -4,8 +4,8 @@ resource "aws_instance" "consul_server_1" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.100
-  key_name = "ubuntu"
+  private_ip                  = "10.0.4.100"
+  key_name                    = "ubuntu"
 
   tags {
     Name        = "consul-server-1"
@@ -13,23 +13,24 @@ resource "aws_instance" "consul_server_1" {
     Role        = "cs"
   }
 
-    provisioner "file" {
+  provisioner "file" {
     source      = "scripts/run-consul-server.sh"
     destination = "/tmp/run-consul-server.sh"
-    
+
     connection {
-      type = "ssh"
-      user = "ubuntu"
+      type        = "ssh"
+      user        = "ubuntu"
       private_key = "${file("ubuntu.pem")}"
     }
-    
-    provisioner "file" {
+  }
+
+  provisioner "file" {
     source      = "consul/consul.json.server"
     destination = "/tmp/consul.json.server"
-    
+
     connection {
-      type = "ssh"
-      user = "ubuntu"
+      type        = "ssh"
+      user        = "ubuntu"
       private_key = "${file("ubuntu.pem")}"
     }
   }
@@ -41,8 +42,8 @@ resource "aws_instance" "consul_server_2" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.174
-  key_name = "ubuntu"
+  private_ip                  = "10.0.4.174"
+  key_name                    = "ubuntu"
 
   tags {
     Name        = "consul-server-2"
@@ -50,23 +51,24 @@ resource "aws_instance" "consul_server_2" {
     Role        = "cs"
   }
 
-    provisioner "file" {
+  provisioner "file" {
     source      = "scripts/run-consul-server.sh"
     destination = "/tmp/run-consul-server.sh"
-    
+
     connection {
-      type = "ssh"
-      user = "ubuntu"
+      type        = "ssh"
+      user        = "ubuntu"
       private_key = "${file("ubuntu.pem")}"
     }
-    
-    provisioner "file" {
+  }
+
+  provisioner "file" {
     source      = "consul/consul.json.server"
     destination = "/tmp/consul.json.server"
-    
+
     connection {
-      type = "ssh"
-      user = "ubuntu"
+      type        = "ssh"
+      user        = "ubuntu"
       private_key = "${file("ubuntu.pem")}"
     }
   }
@@ -78,8 +80,8 @@ resource "aws_instance" "consul_server_3" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.213
-  
+  private_ip                  = "10.0.4.213"
+
   key_name = "ubuntu"
 
   tags {
@@ -88,23 +90,24 @@ resource "aws_instance" "consul_server_3" {
     Role        = "cs"
   }
 
-    provisioner "file" {
+  provisioner "file" {
     source      = "scripts/run-consul-server.sh"
     destination = "/tmp/run-consul-server.sh"
-    
+
     connection {
-      type = "ssh"
-      user = "ubuntu"
+      type        = "ssh"
+      user        = "ubuntu"
       private_key = "${file("ubuntu.pem")}"
     }
-    
-    provisioner "file" {
+  }
+
+  provisioner "file" {
     source      = "consul/consul.json.server"
     destination = "/tmp/consul.json.server"
-    
+
     connection {
-      type = "ssh"
-      user = "ubuntu"
+      type        = "ssh"
+      user        = "ubuntu"
       private_key = "${file("ubuntu.pem")}"
     }
   }
