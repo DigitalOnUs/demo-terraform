@@ -7,3 +7,17 @@
   command: unzip -o /usr/local/src/consul.zip -d /usr/local/bin
   args:
     creates: /usr/local/bin/consul
+
+- name: copying consul script
+  copy:
+    src: consul.sh
+    dest: /tmp/consul.sh
+    mode: 0644
+
+- script: /tmp/consul.sh
+
+- name: copying consul-server script
+  copy:
+    src: consul-server.sh
+    dest: /tmp/consul.sh
+    mode: 0644
