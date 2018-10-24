@@ -1,3 +1,4 @@
+go_creds.sh
 *.pem
 
 # Terraform generated files #
