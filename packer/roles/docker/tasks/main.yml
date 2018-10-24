@@ -12,3 +12,9 @@
     src: docker-lb.sh
     dest: /tmp/docker-lb.sh
     mode: 0644
+
+- name: copying docker-web script
+  copy:
+    src: docker-web.sh
+    dest: /tmp/docker-web.sh
+    mode: 0644
