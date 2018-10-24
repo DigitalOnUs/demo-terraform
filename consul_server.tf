@@ -37,8 +37,7 @@ resource "aws_instance" "consul_server_3" {
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
   private_ip                  = "10.0.4.213"
-
-  key_name = "ubuntu"
+  key_name                    = "ubuntu"
 
   tags {
     Name        = "consul-server-3"
