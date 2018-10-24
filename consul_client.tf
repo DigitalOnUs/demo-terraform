@@ -14,8 +14,8 @@ resource "aws_instance" "consul_client_1" {
   }
 
   provisioner "remote-exec" {
-    scripts = [
-      "/tmp/docker-web.sh",
+    inline = [
+      "sh /var/tmp/docker-web.sh",
     ]
 
     connection {
@@ -42,8 +42,8 @@ resource "aws_instance" "consul_client_2" {
   }
 
   provisioner "remote-exec" {
-    scripts = [
-      "/tmp/docker-web.sh",
+    inline = [
+      "sh /var/tmp/docker-web.sh",
     ]
 
     connection {
@@ -61,8 +61,7 @@ resource "aws_instance" "consul_client_3" {
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
   private_ip                  = "10.0.4.214"
-
-  key_name = "ubuntu"
+  key_name                    = "ubuntu"
 
   tags {
     Name        = "consul-client-3"
@@ -71,8 +70,8 @@ resource "aws_instance" "consul_client_3" {
   }
 
   provisioner "remote-exec" {
-    scripts = [
-      "/tmp/docker-web.sh",
+    inline = [
+      "sh /var/tmp/docker-web.sh",
     ]
 
     connection {

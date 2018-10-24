@@ -11,8 +11,8 @@ resource "aws_instance" "lb" {
   }
 
   provisioner "remote-exec" {
-    scripts = [
-      "/tmp/docker-lb.sh",
+    inline = [
+      "sh /var/tmp/docker-lb.sh",
     ]
 
     connection {

@@ -2,19 +2,19 @@
 - name: copying docker script
   copy:
     src: docker.sh
-    dest: /tmp/docker.sh
+    dest: /var/tmp/docker.sh
     mode: 0644
 
-- script: /tmp/docker.sh
+- script: /var/tmp/docker.sh
 
 - name: copying docker-lb script
   copy:
     src: docker-lb.sh
-    dest: /tmp/docker-lb.sh
+    dest: /var/tmp/docker-lb.sh
     mode: 0644
 
 - name: copying docker-web script
   copy:
     src: docker-web.sh
-    dest: /tmp/docker-web.sh
+    dest: /var/tmp/docker-web.sh
     mode: 0644

@@ -10,7 +10,7 @@ sudo mkdir -p /var/consul
 sudo chown consul:consul /var/consul
 sudo mkdir -p /var/consul/config
 
-sudo cp /tmp/consul.json.server /var/consul/config/consul.json.template
+sudo cp /var/tmp/consul.json.server /var/consul/config/consul.json.template
 
 
 BINDADDR=$(ip addr show dev eth0 | grep "inet " | tail -1 | awk '{ print $2 }' | sed 's/\/.*$//')

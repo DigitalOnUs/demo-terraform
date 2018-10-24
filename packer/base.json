@@ -20,7 +20,7 @@
     {
       "type": "file",
       "source": ".",
-      "destination": "/tmp/ansible"
+      "destination": "/var/tmp/ansible"
     },
     {
       "type": "shell",
