@@ -13,28 +13,6 @@ resource "aws_instance" "consul_client_1" {
     Role        = "cs"
   }
 
-  provisioner "file" {
-    source      = "scripts/run-consul-client.sh"
-    destination = "/tmp/run-consul-client.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.client"
-    destination = "/tmp/consul.json.client"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
   provisioner "remote-exec" {
     scripts = [
       "scripts/run-docker-web.sh",
@@ -61,28 +39,6 @@ resource "aws_instance" "consul_client_2" {
     Name        = "consul-client-2"
     Environment = "demo"
     Role        = "cs"
-  }
-
-  provisioner "file" {
-    source      = "scripts/run-consul-client.sh"
-    destination = "/tmp/run-consul-client.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.client"
-    destination = "/tmp/consul.json.client"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
   }
 
   provisioner "remote-exec" {
@@ -112,28 +68,6 @@ resource "aws_instance" "consul_client_3" {
     Name        = "consul-client-3"
     Environment = "demo"
     Role        = "cs"
-  }
-
-  provisioner "file" {
-    source      = "scripts/run-consul-client.sh"
-    destination = "/tmp/run-consul-client.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.client"
-    destination = "/tmp/consul.json.client"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
   }
 
   provisioner "remote-exec" {

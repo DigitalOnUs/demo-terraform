@@ -15,5 +15,23 @@
 - name: copying consul-server script
   copy:
     src: consul-server.sh
-    dest: /tmp/consul.sh
+    dest: /tmp/consul-server.sh
+    mode: 0644
+
+- name: copying consul-client script
+  copy:
+    src: consul-client.sh
+    dest: /tmp/consul-client.sh
+    mode: 0644
+
+- name: copying consul-client config
+  copy:
+    src: consul.json.client
+    dest: /tmp/consul.json.client
+    mode: 0644
+
+- name: copying consul-server config
+  copy:
+    src: consul.json.server
+    dest: /tmp/consul.json.server
     mode: 0644

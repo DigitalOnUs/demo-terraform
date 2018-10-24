@@ -12,28 +12,6 @@ resource "aws_instance" "consul_server_1" {
     Environment = "demo"
     Role        = "cs"
   }
-
-  provisioner "file" {
-    source      = "scripts/run-consul-server.sh"
-    destination = "/tmp/run-consul-server.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.server"
-    destination = "/tmp/consul.json.server"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
 }
 
 resource "aws_instance" "consul_server_2" {
@@ -49,28 +27,6 @@ resource "aws_instance" "consul_server_2" {
     Name        = "consul-server-2"
     Environment = "demo"
     Role        = "cs"
-  }
-
-  provisioner "file" {
-    source      = "scripts/run-consul-server.sh"
-    destination = "/tmp/run-consul-server.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.server"
-    destination = "/tmp/consul.json.server"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
   }
 }
 
@@ -88,27 +44,5 @@ resource "aws_instance" "consul_server_3" {
     Name        = "consul-server-3"
     Environment = "demo"
     Role        = "cs"
-  }
-
-  provisioner "file" {
-    source      = "scripts/run-consul-server.sh"
-    destination = "/tmp/run-consul-server.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.server"
-    destination = "/tmp/consul.json.server"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
   }
 }
