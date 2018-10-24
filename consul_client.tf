@@ -1,4 +1,4 @@
-resource "aws_instance" "consul_server_1" {
+resource "aws_instance" "consul_client_1" {
   ami                         = "${var.aws_ami}"
   instance_type               = "${var.instance_type}"
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
@@ -48,7 +48,7 @@ resource "aws_instance" "consul_server_1" {
   }
 }
 
-resource "aws_instance" "consul_server_2" {
+resource "aws_instance" "consul_client_2" {
   ami                         = "${var.aws_ami}"
   instance_type               = "${var.instance_type}"
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
@@ -98,7 +98,7 @@ resource "aws_instance" "consul_server_2" {
   }
 }
 
-resource "aws_instance" "consul_server_3" {
+resource "aws_instance" "consul_client_3" {
   ami                         = "${var.aws_ami}"
   instance_type               = "${var.instance_type}"
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
