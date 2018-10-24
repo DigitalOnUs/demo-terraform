@@ -1,0 +1,5 @@
+---
+- name: copying haproxy config
+  copy:
+    src: haproxy.cfg
+    dest: /tmp/haproxy.cfg
