@@ -8,13 +8,9 @@
   args:
     creates: /usr/local/bin/consul
 
-- name: copying consul script
-  copy:
-    src: consul.sh
-    dest: /tmp/consul.sh
+- file:
+    path: /usr/local/bin/consul
     mode: 0644
-
-- script: /tmp/consul.sh
 
 - name: copying consul-server script
   copy:
