@@ -13,31 +13,9 @@ resource "aws_instance" "consul_client_1" {
     Role        = "cs"
   }
 
-  provisioner "file" {
-    source      = "scripts/run-consul-client.sh"
-    destination = "/tmp/run-consul-client.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.client"
-    destination = "/tmp/consul.json.client"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
   provisioner "remote-exec" {
-    scripts = [
-      "scripts/run-docker-web.sh",
+    inline = [
+      "sh /var/tmp/docker-web.sh",
     ]
 
     connection {
@@ -63,31 +41,9 @@ resource "aws_instance" "consul_client_2" {
     Role        = "cs"
   }
 
-  provisioner "file" {
-    source      = "scripts/run-consul-client.sh"
-    destination = "/tmp/run-consul-client.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.client"
-    destination = "/tmp/consul.json.client"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
   provisioner "remote-exec" {
-    scripts = [
-      "scripts/run-docker-web.sh",
+    inline = [
+      "sh /var/tmp/docker-web.sh",
     ]
 
     connection {
@@ -105,8 +61,7 @@ resource "aws_instance" "consul_client_3" {
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
   private_ip                  = "10.0.4.214"
-
-  key_name = "ubuntu"
+  key_name                    = "ubuntu"
 
   tags {
     Name        = "consul-client-3"
@@ -114,31 +69,9 @@ resource "aws_instance" "consul_client_3" {
     Role        = "cs"
   }
 
-  provisioner "file" {
-    source      = "scripts/run-consul-client.sh"
-    destination = "/tmp/run-consul-client.sh"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
-  provisioner "file" {
-    source      = "consul/consul.json.client"
-    destination = "/tmp/consul.json.client"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = "${file("ubuntu.pem")}"
-    }
-  }
-
   provisioner "remote-exec" {
-    scripts = [
-      "scripts/run-docker-web.sh",
+    inline = [
+      "sh /var/tmp/docker-web.sh",
     ]
 
     connection {
