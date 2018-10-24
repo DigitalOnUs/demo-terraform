@@ -1,0 +1,14 @@
+---
+- name: copying docker script
+  copy:
+    src: docker.sh
+    dest: /tmp/docker.sh
+    mode: 0644
+
+- script: /tmp/docker.sh
+
+- name: copying docker-lb script
+  copy:
+    src: docker-lb.sh
+    dest: /tmp/docker-lb.sh
+    mode: 0644

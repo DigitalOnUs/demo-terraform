@@ -1,0 +1,19 @@
+- name: download consul
+  get_url:
+    url: https://releases.hashicorp.com/consul/1.3.0/consul_1.3.0_linux_amd64.zip
+    dest: /usr/local/src/consul.zip
+
+- name: install consul
+  command: unzip -o /usr/local/src/consul.zip -d /usr/local/bin
+  args:
+    creates: /usr/local/bin/consul
+
+- file:
+    path: /usr/local/bin/consul
+    mode: 0644
+
+- name: copying consul-server script
+  copy:
+    src: consul-server.sh
+    dest: /tmp/consul.sh
+    mode: 0644
