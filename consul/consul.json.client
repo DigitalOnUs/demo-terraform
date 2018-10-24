@@ -1,0 +1,8 @@
+{
+  "bind_addr": "@@HOSTIP@@",
+  "client_addr": "@@HOSTIP@@",
+  "server": false,
+  "datacenter": "DC1",
+  "data_dir": "/var/consul/",
+  "log_level": "INFO"
+}

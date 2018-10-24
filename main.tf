@@ -11,6 +11,7 @@ terraform {
 resource "aws_vpc" "my_vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
+  enable_dns_support   = true
 
   tags {
     Name = "terraform-demo"
@@ -87,6 +88,7 @@ resource "aws_route_table_association" "web-public-rt" {
 resource "aws_security_group" "sgweb" {
   name        = "terraform_demo_test_web"
   description = "Allow incoming HTTP connections & SSH access"
+  vpc_id      = "${aws_vpc.my_vpc.id}"
 
   ingress {
     from_port   = 80
@@ -116,7 +118,19 @@ resource "aws_security_group" "sgweb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  vpc_id = "${aws_vpc.my_vpc.id}"
+  egress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   tags {
     Name = "terraform-demo"
@@ -126,32 +140,80 @@ resource "aws_security_group" "sgweb" {
 # Define the security group for public subnet
 resource "aws_security_group" "ncv" {
   name        = "terraform_demo_test_ncv"
-  description = "Allow Consul"
+  description = "Allow Consul communication"
+  vpc_id      = "${aws_vpc.my_vpc.id}"
 
   ingress {
-    from_port   = 0
-    to_port     = 65535
+    from_port   = 8500
+    to_port     = 8500
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/16"]
   }
   
   egress {
-    from_port   = 0
-    to_port     = 65535
+    from_port   = 8500
+    to_port     = 8500
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+ 
+  ingress {
+    from_port   = 8300
+    to_port     = 8300
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  
+  egress {
+    from_port   = 8300
+    to_port     = 8300
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+ 
+  ingress {
+    from_port   = 8301
+    to_port     = 8301
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  
+  egress {
+    from_port   = 8301
+    to_port     = 8301
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  
+  ingress {
+    from_port   = 8302
+    to_port     = 8302
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  
+  egress {
+    from_port   = 8302
+    to_port     = 8302
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
   }
 
   ingress {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  
+  egress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["10.0.0.0/16"]
   }
 
-  vpc_id = "${aws_vpc.my_vpc.id}"
-
   tags {
-    Name = "terraform-demo"
+    Name = "terraform-demo-ncv"
   }
 }

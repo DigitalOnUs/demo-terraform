@@ -24,7 +24,7 @@ sudo cp /tmp/consul.json.server /var/consul/config/consul.json.template
 BINDADDR=$(ip addr show dev eth0 | grep "inet " | tail -1 | awk '{ print $2 }' | sed 's/\/.*$//')
 sudo sed -e s/@@HOSTIP@@/$BINDADDR/g /var/consul/config/consul.json.template > /var/consul/config/consul.json
 
-CONSUL_STARTUP_FLAGS="-server=true -ui -bootstrap-expect 3"
+CONSUL_STARTUP_FLAGS="-server=false"
 
 joinstr="-retry-join 10.0.4.100 -retry-join 10.0.4.174 -retry-join 10.0.4.213"
 

@@ -4,18 +4,18 @@ resource "aws_instance" "consul_server_1" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.100
+  private_ip = 10.0.4.101
   key_name = "ubuntu"
 
   tags {
-    Name        = "consul-server-1"
+    Name        = "consul-client-1"
     Environment = "demo"
     Role        = "cs"
   }
 
     provisioner "file" {
-    source      = "scripts/run-consul-server.sh"
-    destination = "/tmp/run-consul-server.sh"
+    source      = "scripts/run-consul-client.sh"
+    destination = "/tmp/run-consul-client.sh"
     
     connection {
       type = "ssh"
@@ -24,9 +24,32 @@ resource "aws_instance" "consul_server_1" {
     }
     
     provisioner "file" {
-    source      = "consul/consul.json.server"
-    destination = "/tmp/consul.json.server"
+    source      = "consul/consul.json.client"
+    destination = "/tmp/consul.json.client"
     
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = "${file("ubuntu.pem")}"
+    }
+  }
+    
+  provisioner "file" {
+    source      = "consul/consul.json.client"
+    destination = "/tmp/consul.json.client"
+    
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = "${file("ubuntu.pem")}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    scripts = [
+      "scripts/run-docker-web.sh"
+    ]
+
     connection {
       type = "ssh"
       user = "ubuntu"
@@ -41,18 +64,18 @@ resource "aws_instance" "consul_server_2" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.174
+  private_ip = 10.0.4.175
   key_name = "ubuntu"
 
   tags {
-    Name        = "consul-server-2"
+    Name        = "consul-client-2"
     Environment = "demo"
     Role        = "cs"
   }
 
     provisioner "file" {
-    source      = "scripts/run-consul-server.sh"
-    destination = "/tmp/run-consul-server.sh"
+    source      = "scripts/run-consul-client.sh"
+    destination = "/tmp/run-consul-client.sh"
     
     connection {
       type = "ssh"
@@ -61,9 +84,21 @@ resource "aws_instance" "consul_server_2" {
     }
     
     provisioner "file" {
-    source      = "consul/consul.json.server"
-    destination = "/tmp/consul.json.server"
+    source      = "consul/consul.json.client"
+    destination = "/tmp/consul.json.client"
     
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = "${file("ubuntu.pem")}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    scripts = [
+      "scripts/run-docker-web.sh"
+    ]
+
     connection {
       type = "ssh"
       user = "ubuntu"
@@ -78,19 +113,19 @@ resource "aws_instance" "consul_server_3" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.213
+  private_ip = 10.0.4.214
   
   key_name = "ubuntu"
 
   tags {
-    Name        = "consul-server-3"
+    Name        = "consul-client-3"
     Environment = "demo"
     Role        = "cs"
   }
 
     provisioner "file" {
-    source      = "scripts/run-consul-server.sh"
-    destination = "/tmp/run-consul-server.sh"
+    source      = "scripts/run-consul-client.sh"
+    destination = "/tmp/run-consul-client.sh"
     
     connection {
       type = "ssh"
@@ -99,9 +134,21 @@ resource "aws_instance" "consul_server_3" {
     }
     
     provisioner "file" {
-    source      = "consul/consul.json.server"
-    destination = "/tmp/consul.json.server"
+    source      = "consul/consul.json.client"
+    destination = "/tmp/consul.json.client"
     
+    connection {
+      type = "ssh"
+      user = "ubuntu"
+      private_key = "${file("ubuntu.pem")}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    scripts = [
+      "scripts/run-docker-web.sh"
+    ]
+
     connection {
       type = "ssh"
       user = "ubuntu"

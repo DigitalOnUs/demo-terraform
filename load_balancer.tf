@@ -10,7 +10,6 @@ resource "aws_instance" "lb" {
     Name = "terraform-demo"
   }
 
-  # Copies the haproxy.cfg file to /home/haproxy.cfg
   provisioner "file" {
     source      = "scripts/haproxy.cfg"
     destination = "/tmp/haproxy.cfg"
@@ -24,8 +23,6 @@ resource "aws_instance" "lb" {
 
   provisioner "remote-exec" {
     scripts = [
-      "scripts/install-consul.sh",
-      "scripts/install-docker.sh",
       "scripts/run-docker-lb.sh"
     ]
 
