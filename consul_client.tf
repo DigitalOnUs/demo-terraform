@@ -4,7 +4,7 @@ resource "aws_instance" "consul_server_1" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.101
+  private_ip = "10.0.4.101"
   key_name = "ubuntu"
 
   tags {
@@ -64,7 +64,7 @@ resource "aws_instance" "consul_server_2" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.175
+  private_ip = "10.0.4.175"
   key_name = "ubuntu"
 
   tags {
@@ -113,7 +113,7 @@ resource "aws_instance" "consul_server_3" {
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
-  private_ip = 10.0.4.214
+  private_ip = "10.0.4.214"
   
   key_name = "ubuntu"
 
