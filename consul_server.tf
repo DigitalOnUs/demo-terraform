@@ -16,6 +16,7 @@ resource "aws_instance" "consul_server_1" {
     inline = [
       "echo server > /var/tmp/consul.agent",
       "sudo systemctl enable consul",
+      "sudo service consul start",
     ]
 
     connection {
@@ -44,6 +45,7 @@ resource "aws_instance" "consul_server_2" {
     inline = [
       "echo server > /var/tmp/consul.agent",
       "sudo systemctl enable consul",
+      "sudo service consul start",
     ]
 
     connection {
@@ -72,6 +74,7 @@ resource "aws_instance" "consul_server_3" {
     inline = [
       "echo server > /var/tmp/consul.agent",
       "sudo systemctl enable consul",
+      "sudo service consul start",
     ]
 
     connection {
