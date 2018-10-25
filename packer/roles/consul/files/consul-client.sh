@@ -11,6 +11,13 @@ sudo chown consul:consul /var/consul
 sudo mkdir -p /var/consul/config
 
 sudo cp /var/tmp/consul.json.client /var/consul/config/consul.json.template
+BINDADDR=$(ip addr show dev eth0 | grep "inet " | tail -1 | awk '{ print $2 }' | sed 's/\/.*$//')
+
+if [ "$BINDADDR" != "10.0.4.130" ]; then
+    sudo cp /var/tmp/web.service.json /var/consul/config
+else
+    sudo cp /var/tmp/lb.service.json /var/consul/config
+fi
 
     # Enable consul ports in iptables
     # SERF
@@ -24,7 +31,6 @@ sudo cp /var/tmp/consul.json.client /var/consul/config/consul.json.template
 
     sudo iptables -I INPUT -s 0/0 -p tcp --dport 8080 -j ACCEPT
 
-BINDADDR=$(ip addr show dev eth0 | grep "inet " | tail -1 | awk '{ print $2 }' | sed 's/\/.*$//')
 sudo sed -e s/@@HOSTIP@@/$BINDADDR/g /var/consul/config/consul.json.template > /var/consul/config/consul.json
 
 CONSUL_STARTUP_FLAGS="-server=false"

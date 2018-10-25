@@ -46,4 +46,15 @@
   copy:
     src: consul.service
     dest: /etc/systemd/system/consul.service
+
+- name: copying web service config
+  copy:
+    src: web.service.json
+    dest: /var/tmp/web.service.json
+    mode: 0644
+
+- name: copying LB service config
+  copy:
+    src: lb.service.json
+    dest: /var/tmp/lb.service.json
     mode: 0644
