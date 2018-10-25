@@ -15,6 +15,7 @@ resource "aws_instance" "consul_server_1" {
   provisioner "remote-exec" {
     inline = [
       "echo server > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
     ]
 
     connection {
@@ -42,6 +43,7 @@ resource "aws_instance" "consul_server_2" {
   provisioner "remote-exec" {
     inline = [
       "echo server > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
     ]
 
     connection {
@@ -69,6 +71,7 @@ resource "aws_instance" "consul_server_3" {
   provisioner "remote-exec" {
     inline = [
       "echo server > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
     ]
 
     connection {

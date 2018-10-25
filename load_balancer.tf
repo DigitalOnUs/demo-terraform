@@ -6,7 +6,7 @@ resource "aws_instance" "lb" {
   associate_public_ip_address = true
   key_name                    = "ubuntu"
   private_ip                  = "10.0.4.130"
-  
+
   tags {
     Name = "terraform-demo"
   }
@@ -36,6 +36,19 @@ resource "aws_instance" "lb" {
   provisioner "remote-exec" {
     inline = [
       "sh /var/tmp/docker-lb.sh",
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("ubuntu.pem")}"
+    }
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo client > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
     ]
 
     connection {

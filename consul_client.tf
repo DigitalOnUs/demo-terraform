@@ -17,6 +17,7 @@ resource "aws_instance" "consul_client_1" {
     inline = [
       "sh /var/tmp/docker-web.sh",
       "echo client > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
     ]
 
     connection {
@@ -46,6 +47,7 @@ resource "aws_instance" "consul_client_2" {
     inline = [
       "sh /var/tmp/docker-web.sh",
       "echo client > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
     ]
 
     connection {
@@ -75,6 +77,7 @@ resource "aws_instance" "consul_client_3" {
     inline = [
       "sh /var/tmp/docker-web.sh",
       "echo client > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
     ]
 
     connection {
