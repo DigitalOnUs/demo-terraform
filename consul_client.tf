@@ -16,6 +16,7 @@ resource "aws_instance" "consul_client_1" {
   provisioner "remote-exec" {
     inline = [
       "sh /var/tmp/docker-web.sh",
+      "echo client > /var/tmp/consul.agent",
     ]
 
     connection {
@@ -44,6 +45,7 @@ resource "aws_instance" "consul_client_2" {
   provisioner "remote-exec" {
     inline = [
       "sh /var/tmp/docker-web.sh",
+      "echo client > /var/tmp/consul.agent",
     ]
 
     connection {
@@ -72,6 +74,7 @@ resource "aws_instance" "consul_client_3" {
   provisioner "remote-exec" {
     inline = [
       "sh /var/tmp/docker-web.sh",
+      "echo client > /var/tmp/consul.agent",
     ]
 
     connection {
