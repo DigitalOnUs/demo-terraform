@@ -19,4 +19,4 @@ sudo sed -e s/@@HOSTIP@@/$BINDADDR/g /var/consul/config/consul.json.template > /
 CONSUL_STARTUP_FLAGS="-server=true -ui -bootstrap-expect 3"
 
 exec /usr/local/bin/consul agent -config-dir /var/consul/config -data-dir /var/consul \
-      -bind $BINDADDR -node $(hostname) $joinstr $CONSUL_STARTUP_FLAGS >>/var/log/consul.log 2>&1
+      -bind $BINDADDR -node $(hostname) $joinstr $CONSUL_STARTUP_FLAGS >>/var/log/consul.log 2>&1 &

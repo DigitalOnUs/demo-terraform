@@ -96,7 +96,7 @@ resource "aws_security_group" "sgweb" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   ingress {
     from_port   = 8500
     to_port     = 8500
@@ -163,7 +163,7 @@ resource "aws_security_group" "ncv" {
     protocol    = "tcp"
     cidr_blocks = ["10.0.0.0/16"]
   }
-  
+
   ingress {
     from_port   = 8080
     to_port     = 8080
