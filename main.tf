@@ -6,7 +6,7 @@ provider "aws" {
 
 terraform {
   required_version = ">= 0.11.9"
-  
+
   backend "consul" {
     address = "54.149.97.163:8500"
     scheme  = "http"
@@ -104,8 +104,8 @@ resource "aws_security_group" "sgweb" {
   }
 
   ingress {
-    from_port   = 8500
-    to_port     = 8500
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
