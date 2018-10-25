@@ -3,7 +3,7 @@ variable "secret_key" {}
 
 variable "aws_ami" {
   description = "AMI to be used for aws instances"
-  default     = "ami-0fc2c25567d920f1f"
+  default     = "ami-0ffba45bfd18af19c"
 }
 
 variable "region" {

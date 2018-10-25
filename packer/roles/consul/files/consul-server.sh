@@ -21,4 +21,4 @@ CONSUL_STARTUP_FLAGS="-server=true -ui -bootstrap-expect 3"
 joinstr="-retry-join 10.0.4.100 -retry-join 10.0.4.174 -retry-join 10.0.4.213"
 
 exec /usr/local/bin/consul agent -config-dir /var/consul/config -data-dir /var/consul \
-      -bind $BINDADDR -node $(hostname) $joinstr $CONSUL_STARTUP_FLAGS >>/var/log/consul.log 2>&1 &
+      -bind $BINDADDR -node $(hostname) $joinstr $CONSUL_STARTUP_FLAGS >>/var/log/consul.log 2>&1
