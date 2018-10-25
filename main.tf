@@ -24,36 +24,6 @@ resource "aws_vpc" "my_vpc" {
   }
 }
 
-resource "aws_subnet" "subnet_a" {
-  vpc_id            = "${aws_vpc.my_vpc.id}"
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "${var.region}a"
-
-  tags {
-    Name = "terraform-demo"
-  }
-}
-
-resource "aws_subnet" "subnet_b" {
-  vpc_id            = "${aws_vpc.my_vpc.id}"
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "${var.region}b"
-
-  tags {
-    Name = "terraform-demo"
-  }
-}
-
-resource "aws_subnet" "subnet_c" {
-  vpc_id            = "${aws_vpc.my_vpc.id}"
-  cidr_block        = "10.0.3.0/24"
-  availability_zone = "${var.region}c"
-
-  tags {
-    Name = "terraform-demo"
-  }
-}
-
 resource "aws_subnet" "subnet_lb" {
   vpc_id     = "${aws_vpc.my_vpc.id}"
   cidr_block = "10.0.4.0/24"
