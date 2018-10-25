@@ -5,7 +5,8 @@ resource "aws_instance" "lb" {
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}"]
   associate_public_ip_address = true
   key_name                    = "ubuntu"
-
+  private_ip                  = "10.0.4.130"
+  
   tags {
     Name = "terraform-demo"
   }
