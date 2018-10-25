@@ -12,6 +12,7 @@ resource "aws_instance" "consul_server_1" {
     Environment = "demo"
     Role        = "cs"
   }
+
   provisioner "remote-exec" {
     inline = [
       "echo server > /var/tmp/consul.agent",
@@ -41,6 +42,7 @@ resource "aws_instance" "consul_server_2" {
     Environment = "demo"
     Role        = "cs"
   }
+
   provisioner "remote-exec" {
     inline = [
       "echo server > /var/tmp/consul.agent",
@@ -70,6 +72,7 @@ resource "aws_instance" "consul_server_3" {
     Environment = "demo"
     Role        = "cs"
   }
+
   provisioner "remote-exec" {
     inline = [
       "echo server > /var/tmp/consul.agent",

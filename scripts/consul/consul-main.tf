@@ -35,7 +35,6 @@ resource "consul_keys" "consul-servers" {
   }
 }
 
-
 data "consul_services" "read-dc1" {
   query_options {
     datacenter = "DC1"
@@ -60,10 +59,10 @@ resource "consul_prepared_query" "myapp" {
 }
 
 resource "consul_service" "search" {
-  name    = "search"
-  node    = "${consul_node.search.name}"
-  port    = 80
-  tags    = ["external-services"]
+  name       = "search"
+  node       = "${consul_node.search.name}"
+  port       = 80
+  tags       = ["external-services"]
   datacenter = "dc1"
 }
 

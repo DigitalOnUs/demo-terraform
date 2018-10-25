@@ -5,13 +5,13 @@ provider "aws" {
 }
 
 terraform {
-  required_version = ">= 0.11.9"
+  required_version = ">= 0.11.10"
 
-  backend "consul" {
-    address = "54.149.97.163:8500"
-    scheme  = "http"
-    path    = "full/path"
-  }
+  #backend "consul" {
+  #address = "54.149.97.163:8500"
+  #scheme  = "http"
+  #path    = "full/path"
+  #}
 }
 
 resource "aws_vpc" "my_vpc" {

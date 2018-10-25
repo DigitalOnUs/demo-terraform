@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.11.9"
+  required_version = ">= 0.11.10"
 }
 
 provider "datadog" {
@@ -80,13 +80,18 @@ resource "datadog_monitor" "disk_monitor" {
 }
 
 resource "datadog_monitor" "cpu_monitor" {
-  name           = "CPU usage high"
-  query          = "avg(last_5m):${var.cpu_usage["query"]}{*} by ${var.trigger_by} > ${var.cpu_usage["threshold"]}"
-  type           = "query alert"
-  notify_no_data = true
-  include_tags   = true
+  name    = "cpu monitor"
+  type    = "metric alert"
+  message = "CPU usage alert"
+  query   = "avg(last_1m):avg:system.cpu.system{*} by {host} > 60"
 
-  message = ""
+  thresholds {
+    ok       = 20
+    warning  = 50
+    critical = 60
+  }
+
+  new_host_delay = 30
 }
 
 resource "datadog_timeboard" "host_metrics" {
@@ -130,14 +135,11 @@ resource "datadog_timeboard" "host_metrics" {
 }
 
 resource "datadog_downtime" "downtime_us" {
-  active = "true"
+  active   = "true"
   disabled = "false"
-  scope = ["role:cs,env:prod"]
-  message = "Enabling nginx monitors in US"
+  scope    = ["role:cs,env:prod"]
+  message  = "Enabling nginx monitors in US"
 }
-
-
-
 
 variable "trigger_by" {
   default = "{host,env}"
