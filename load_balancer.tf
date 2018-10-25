@@ -49,6 +49,7 @@ resource "aws_instance" "lb" {
     inline = [
       "echo client > /var/tmp/consul.agent",
       "sudo systemctl enable consul",
+      "sudo service consul start",
     ]
 
     connection {

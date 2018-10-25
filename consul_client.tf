@@ -18,6 +18,7 @@ resource "aws_instance" "consul_client_1" {
       "sh /var/tmp/docker-web.sh",
       "echo client > /var/tmp/consul.agent",
       "sudo systemctl enable consul",
+      "sudo service consul start",
     ]
 
     connection {
@@ -48,6 +49,7 @@ resource "aws_instance" "consul_client_2" {
       "sh /var/tmp/docker-web.sh",
       "echo client > /var/tmp/consul.agent",
       "sudo systemctl enable consul",
+      "sudo service consul start",
     ]
 
     connection {
@@ -78,6 +80,7 @@ resource "aws_instance" "consul_client_3" {
       "sh /var/tmp/docker-web.sh",
       "echo client > /var/tmp/consul.agent",
       "sudo systemctl enable consul",
+      "sudo service consul start",
     ]
 
     connection {
