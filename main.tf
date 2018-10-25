@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 terraform {
-  required_version = ">= 0.11.9"
+  required_version = ">= 0.11.10"
 }
 
 resource "aws_vpc" "my_vpc" {

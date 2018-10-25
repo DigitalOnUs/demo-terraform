@@ -35,3 +35,15 @@
     src: consul.json.server
     dest: /var/tmp/consul.json.server
     mode: 0644
+
+- name: copying consul script
+  copy:
+    src: consul.sh
+    dest: /var/tmp/consul.sh
+    mode: 0644
+
+- name: copying consul service
+  copy:
+    src: consul.service
+    dest: /etc/systemd/system/consul.service
+    mode: 0644
