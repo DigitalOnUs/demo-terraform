@@ -8,7 +8,7 @@ resource "aws_instance" "lb" {
   private_ip                  = "10.0.4.130"
   
   tags {
-    Name = "terraform-demo"
+    Name = "terraform-demo-lb"
   }
 
   provisioner "file" {
