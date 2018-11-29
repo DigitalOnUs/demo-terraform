@@ -8,7 +8,7 @@ terraform {
   required_version = ">= 0.11.9"
 
   // backend "consul" {
-  //   address = "54.149.97.163:8500"
+  //   address = "34.221.56.93:9500"
   //   scheme  = "http"
   //   path    = "terraform/state"
   // }

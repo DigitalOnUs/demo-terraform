@@ -1,36 +1,21 @@
 provider "consul" {
-  address    = "54.149.97.163:8500"
+  address    = "34.221.56.93:9500"
   datacenter = "DC1"
 }
 
-resource "consul_keys" "instance-details" {
-  key {
-    name   = "ami"
-    path   = "instance/ami"
-    value  = "${var.aws_ami}"
-    delete = true
-  }
-
-  key {
-    name   = "address"
-    path   = "instance/type"
-    value  = "${aws_instance.consul_client_1.instance_type}"
-    delete = true
-  }
-}
 
 resource "consul_keys" "consul-servers" {
   key {
     name   = "address"
     path   = "consul/cluster/servers"
-    value  = "[${aws_instance.consul_server_1.private_ip}, ${aws_instance.consul_server_2.private_ip}, ${aws_instance.consul_server_3.private_ip}]"
+    value  = "[${join(",", aws_instance.consul_servers.*.private_ip)}]"
     delete = true
   }
 
   key {
     name   = "address"
     path   = "consul/cluster/clients"
-    value  = "[${aws_instance.consul_client_1.private_ip}, ${aws_instance.consul_client_2.private_ip}, ${aws_instance.consul_client_3.private_ip}]"
+    value  = "[${join(",", aws_instance.consul_clients.*.private_ip)}]"
     delete = true
   }
 }
