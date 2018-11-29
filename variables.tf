@@ -3,7 +3,7 @@ variable "secret_key" {}
 
 variable "aws_ami" {
   description = "This AMI has been generated with Packer and containes Docker and Datadog installed"
-  default     = "ami-0ffba45bfd18af19c"
+  default     = "ami-0f4022535e15dec67"
 }
 
 variable "region" {

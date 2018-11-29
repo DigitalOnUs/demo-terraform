@@ -8,12 +8,12 @@ resource "aws_instance" "lb" {
   private_ip                  = "10.0.4.130"
   
   tags {
-    Name = "terraform-demo-lb"
+    Name = "bastion-host"
   }
 
   provisioner "file" {
-    source      = "scripts/haproxy.cfg"
-    destination = "/var/tmp/haproxy.cfg"
+    source      = "scripts/haproxy-clients.cfg"
+    destination = "/var/tmp/haproxy-clients.cfg"
 
     connection {
       type        = "ssh"
@@ -23,8 +23,8 @@ resource "aws_instance" "lb" {
   }
 
   provisioner "file" {
-    source      = "scripts/haproxy2.cfg"
-    destination = "/var/tmp/haproxy2.cfg"
+    source      = "scripts/haproxy-servers.cfg"
+    destination = "/var/tmp/haproxy-servers.cfg"
 
     connection {
       type        = "ssh"
@@ -36,6 +36,8 @@ resource "aws_instance" "lb" {
   provisioner "remote-exec" {
     inline = [
       "sh /var/tmp/docker-lb.sh",
+      "echo client > /var/tmp/consul.agent",
+      "sudo service consul start"
     ]
 
     connection {
