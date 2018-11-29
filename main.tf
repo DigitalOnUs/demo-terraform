@@ -7,15 +7,16 @@ provider "aws" {
 terraform {
   required_version = ">= 0.11.9"
 
-  // backend "consul" {
-  //   address = "34.221.56.93:9500"
-  //   scheme  = "http"
-  //   path    = "terraform/state"
-  // }
+  backend "consul" {
+    address = "34.221.202.216:9500"
+    scheme  = "http"
+    path    = "terraform/state"
+  }
 }
 
 data "aws_ami" "host_image" {
   most_recent = true
+  owners = ["237889007525"]
 
   filter {
     name = "name"
@@ -23,7 +24,7 @@ data "aws_ami" "host_image" {
   }
 
   filter {
-    name = "owner-alias"
-    values = ["237889007525"]
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 }

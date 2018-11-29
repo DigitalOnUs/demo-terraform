@@ -45,7 +45,7 @@ resource "aws_route_table_association" "web-public-rt" {
 }
 
 
-module "frontdoor_sg" {
+module "security_group" {
   source = "terraform-aws-modules/security-group/aws"
 
   name        = "terraform_demo_test_web"
@@ -60,7 +60,7 @@ module "frontdoor_sg" {
       from_port   = 9500
       to_port     = 9500
       protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
 
@@ -69,7 +69,7 @@ module "frontdoor_sg" {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
-    cidr_blocks = ["10.0.0.0/16"]
+    cidr_blocks = "10.0.0.0/16"
   }]
 
   tags {

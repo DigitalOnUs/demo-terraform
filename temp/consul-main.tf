@@ -1,5 +1,5 @@
 provider "consul" {
-  address    = "34.221.56.93:9500"
+  address    = "34.221.202.216:9500"
   datacenter = "DC1"
 }
 
