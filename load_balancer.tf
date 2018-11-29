@@ -1,10 +1,10 @@
 resource "aws_instance" "lb" {
-  ami                         = "${var.aws_ami}"
+  ami                         = "${var.aws_ami == data.aws_ami.host_image.id ? data.aws_ami.host_image.id : var.aws_ami}"
   instance_type               = "${var.instance_type}"
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}"]
+  key_name                    = "${var.instance_key}"
   associate_public_ip_address = true
-  key_name                    = "ubuntu"
   private_ip                  = "10.0.4.130"
   
   tags {
@@ -17,7 +17,7 @@ resource "aws_instance" "lb" {
 
     connection {
       type        = "ssh"
-      user        = "ubuntu"
+      user        = "${var.instance_key}"
       private_key = "${file("ubuntu.pem")}"
     }
   }
@@ -28,7 +28,7 @@ resource "aws_instance" "lb" {
 
     connection {
       type        = "ssh"
-      user        = "ubuntu"
+      user        = "${var.instance_key}"
       private_key = "${file("ubuntu.pem")}"
     }
   }
@@ -42,7 +42,7 @@ resource "aws_instance" "lb" {
 
     connection {
       type        = "ssh"
-      user        = "ubuntu"
+      user        = "${var.instance_key}"
       private_key = "${file("ubuntu.pem")}"
     }
   }

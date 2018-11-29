@@ -15,3 +15,8 @@ variable "instance_type" {
   description = "type of instance to be used"
   default     = "t2.micro"
 }
+
+variable "instance_key" {
+  description = "key to ssh to instances"
+  default     = "ubuntu"
+}

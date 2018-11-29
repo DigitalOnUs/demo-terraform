@@ -44,60 +44,33 @@ resource "aws_route_table_association" "web-public-rt" {
   route_table_id = "${aws_route_table.web-public-rt.id}"
 }
 
-# Define the security group for public subnet
-resource "aws_security_group" "sgweb" {
+
+module "frontdoor_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+
   name        = "terraform_demo_test_web"
   description = "Allow incoming HTTP connections & SSH access"
   vpc_id      = "${aws_vpc.my_vpc.id}"
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules       = ["http-80-tcp", "all-icmp", "ssh-tcp"]
+  egress_rules        = ["all-all"]
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 9500
+      to_port     = 9500
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
 
-  ingress {
-    from_port   = 9500
-    to_port     = 9500
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = -1
-    to_port     = -1
-    protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
+  egress_with_cidr_blocks = [
+  {
     from_port   = -1
     to_port     = -1
     protocol    = "icmp"
     cidr_blocks = ["10.0.0.0/16"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  }]
 
   tags {
     Name = "terraform-demo"

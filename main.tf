@@ -13,3 +13,17 @@ terraform {
   //   path    = "terraform/state"
   // }
 }
+
+data "aws_ami" "host_image" {
+  most_recent = true
+
+  filter {
+    name = "name"
+    values = ["consul*"]
+  }
+
+  filter {
+    name = "owner-alias"
+    values = ["237889007525"]
+  }
+}

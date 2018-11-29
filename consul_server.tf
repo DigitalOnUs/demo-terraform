@@ -1,13 +1,13 @@
 resource "aws_instance" "consul_servers" {
   count = 3
 
-  ami                         = "${var.aws_ami}"
+  ami                         = "${var.aws_ami == data.aws_ami.host_image.id ? data.aws_ami.host_image.id : var.aws_ami}"
   instance_type               = "${var.instance_type}"
   subnet_id                   = "${aws_subnet.subnet_lb.id}"
   vpc_security_group_ids      = ["${aws_security_group.sgweb.id}", "${aws_security_group.ncv.id}"]
   associate_public_ip_address = true
   private_ip                  = "10.0.4.1${(count.index + 1)*20}"
-  key_name                    = "ubuntu"
+  key_name                    = "${var.instance_key}"
 
   tags {
     Name        = "consul-server-${count.index + 1}"
@@ -22,7 +22,7 @@ resource "aws_instance" "consul_servers" {
 
     connection {
       type        = "ssh"
-      user        = "ubuntu"
+      user        = "${var.instance_key}"
       private_key = "${file("ubuntu.pem")}"
     }
   }
