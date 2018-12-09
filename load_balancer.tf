@@ -8,7 +8,8 @@ resource "aws_instance" "lb" {
   private_ip                  = "10.0.4.130"
   
   tags {
-    Name = "bastion-host"
+    Name        = "bastion-host"
+    Environment = "${terraform.workspace}"
   }
 
   provisioner "file" {
