@@ -1,5 +1,5 @@
 provider "consul" {
-  address    = "34.221.202.216:9500"
+  address    = "34.217.76.104:9500"
   datacenter = "DC1"
 }
 
@@ -8,14 +8,14 @@ resource "consul_keys" "consul-servers" {
   key {
     name   = "address"
     path   = "consul/cluster/servers"
-    value  = "[${join(",", aws_instance.consul_servers.*.private_ip)}]"
+    value  = "[${join(",", module.consul-servers.servers)}]"
     delete = true
   }
 
   key {
     name   = "address"
     path   = "consul/cluster/clients"
-    value  = "[${join(",", aws_instance.consul_clients.*.private_ip)}]"
+    value  = "[${join(",", module.consul-clients.servers)}]"
     delete = true
   }
 }

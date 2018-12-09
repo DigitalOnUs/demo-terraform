@@ -21,7 +21,7 @@ resource "aws_instance" "consul_instance" {
     connection {
       type        = "ssh"
       user        = "${var.instance_key}"
-      private_key = "${file("./ubuntu.pem")}"
+      private_key = "${file("ubuntu.pem")}"
     }
   }
 }

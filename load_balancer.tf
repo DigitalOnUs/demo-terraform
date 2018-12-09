@@ -13,7 +13,7 @@ resource "aws_instance" "lb" {
   }
 
   provisioner "file" {
-    source      = "scripts/haproxy-clients.cfg"
+    source      = "others/scripts/haproxy-clients.cfg"
     destination = "/var/tmp/haproxy-clients.cfg"
 
     connection {
@@ -24,7 +24,7 @@ resource "aws_instance" "lb" {
   }
 
   provisioner "file" {
-    source      = "scripts/haproxy-servers.cfg"
+    source      = "others/scripts/haproxy-servers.cfg"
     destination = "/var/tmp/haproxy-servers.cfg"
 
     connection {

@@ -8,7 +8,7 @@ terraform {
   required_version = ">= 0.11.9"
 
   // backend "consul" {
-  //   address = "34.221.202.216:9500"
+  //   address = "34.217.76.104:9500"
   //   scheme  = "http"
   //   path    = "terraform/state"
   // }
@@ -40,7 +40,7 @@ module "consul-clients" {
   source = "./modules/consul-instance"
   
   command_line = [
-    "sh /var/tmp/docker-web.sh",
+    "sh /var/tmp/docker-web.sh ${terraform.workspace}",
     "echo client > /var/tmp/consul.agent",
     "sudo service consul start"
   ]
