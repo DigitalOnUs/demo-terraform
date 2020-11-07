@@ -12,6 +12,20 @@ resource "aws_instance" "consul_server_1" {
     Environment = "demo"
     Role        = "cs"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo server > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
+      "sudo service consul start",
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("ubuntu.pem")}"
+    }
+  }
 }
 
 resource "aws_instance" "consul_server_2" {
@@ -28,6 +42,20 @@ resource "aws_instance" "consul_server_2" {
     Environment = "demo"
     Role        = "cs"
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo server > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
+      "sudo service consul start",
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("ubuntu.pem")}"
+    }
+  }
 }
 
 resource "aws_instance" "consul_server_3" {
@@ -43,5 +71,19 @@ resource "aws_instance" "consul_server_3" {
     Name        = "consul-server-3"
     Environment = "demo"
     Role        = "cs"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo server > /var/tmp/consul.agent",
+      "sudo systemctl enable consul",
+      "sudo service consul start",
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file("ubuntu.pem")}"
+    }
   }
 }
