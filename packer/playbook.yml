@@ -4,4 +4,4 @@
     - common
     - consul
     - docker
-    - { role: datadog, become: yes, datadog_api_key: "bb5f859700aa8cb846f4adbfd3448608" }
+    - { role: datadog, become: yes, datadog_api_key: "bb5f859700aa8cb846f4adbfd3448609" }
