@@ -1,0 +1,5 @@
+---
+- include: pkg-debian.yml
+
+- include: agent6.yml
+  when: not datadog_agent5
